@@ -1,5 +1,4 @@
-// 常量声明
-const log = console.log.bind(console);
+// 常量
 const es = selector => document.querySelector(selector);
 
 const canvas = document.getElementById('canvas');
@@ -13,14 +12,15 @@ const BACKGROUND_COLOR = 'White';
 const BOARD_COLOR = 'Black';
 const SNAKE_COLOR = 'CornflowerBlue';
 const SNAKE_BOARD_COLOR = 'Black';
-const FOOD_COLOR = 'LightCoral';
-const FOOD_BOARD_COLOR = 'Black';
 
-const SNAKE_SPEED = 200;
+const SNAKE_SPEED = 150;
 const SNAKE_LENGTH = 5;
 const SNAKE_BODY_HEIGHT = 10;
 const SNAKE_BODY_WIDTH = 10;
+
 const FOOD_LENGTH = 10;
+const FOOD_COLOR = 'LightCoral';
+const FOOD_BOARD_COLOR = 'Black';
 
 let dx = 10;
 let dy = 0;
@@ -87,6 +87,7 @@ function drawFood() {
 // 得分
 function scoreCounter() {
   const snakeEatFood = snakeOverlap(snake[0], food);
+
   if (snakeEatFood) {
     score += 10;
     document.getElementById('score').innerHTML = '得分：' + score;
@@ -116,8 +117,8 @@ function changeDirection(event) {
     dx === 10,
   ];
 
-  // document.addEventListener('keydown', () => {
   changingDirection = true;
+
   if (event.key === 'ArrowUp' && !goingDown) {
     dx = 0;
     dy = -10;
@@ -135,7 +136,6 @@ function changeDirection(event) {
     dy = 0;
     return;
   }
-  // });
 }
 
 // 出界
@@ -189,6 +189,7 @@ function gameOverEvent() {
 function recordScore() {
   let record = es('#highscore');
   let highScore = localStorage.highScore;
+
   if (localStorage.highScore === undefined) {
     localStorage.setItem('highScore', 0);
   } else if (score > highScore) {
